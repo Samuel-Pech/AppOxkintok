@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -70,7 +71,9 @@ class HomeScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.exit_to_app,
                 title: 'Salir',
-                onTap: () {},
+                onTap: () {
+                  _showExitConfirmation(context);
+                },
               ),
             ],
           ),
@@ -167,6 +170,32 @@ class HomeScreen extends StatelessWidget {
         ),
         Divider(color: Colors.white, thickness: 0.5, indent: 16, endIndent: 16),
       ],
+    );
+  }
+
+  void _showExitConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Salir de la aplicación'),
+          content: Text('¿Estás seguro de que deseas salir?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                exit(0); // Cerrar la app
+              },
+              child: Text('Salir'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
