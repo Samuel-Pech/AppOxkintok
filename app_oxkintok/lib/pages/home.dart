@@ -1,4 +1,12 @@
 import 'dart:io';
+import 'package:app_oxkintok/pages/data_curiosities.dart';
+import 'package:app_oxkintok/pages/languages.dart';
+import 'package:app_oxkintok/pages/map.dart';
+import 'package:app_oxkintok/pages/plan_visit.dart';
+import 'package:app_oxkintok/pages/scanner.dart';
+import 'package:app_oxkintok/pages/security_emergency.dart';
+import 'package:app_oxkintok/pages/timeline.dart';
+import 'package:app_oxkintok/pages/tourism_guide.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -26,47 +34,82 @@ class HomeScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.home,
                 title: 'Inicio',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.location_on,
-                title: 'Ubicación',
-                onTap: () {},
+                title: 'Guia',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TourismGuidePage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.map,
-                title: 'Guía',
-                onTap: () {},
+                title: 'Mapa',
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MapPage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.qr_code_scanner,
                 title: 'Escáner',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ScannerPage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.book,
                 title: 'Datos y Curiosidades',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DataCuriositiesPage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.history,
                 title: 'Historial y Evolución',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TimelinePage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.calendar_today,
                 title: 'Planificar visita',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PlanVisitPage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.call,
                 title: 'Seguridad y Emergencia',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SecurityEmergencyPage()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.language,
                 title: 'Idiomas',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LanguageScreen()));
+                },
               ),
               _buildMenuItem(
                 icon: Icons.exit_to_app,
