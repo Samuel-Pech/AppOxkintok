@@ -10,51 +10,70 @@ class HomeScreen extends StatelessWidget {
           'Oxkintok',
           style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
         ),
-        backgroundColor: Colors.green.shade200,
+        backgroundColor: Color(0xFF2F9D70),
         elevation: 5,
       ),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                gradient: LinearGradient(
-                  colors: [Colors.blue.shade400, Colors.blue.shade600],
-                ),
+      drawer: Drawer(
+        child: Container(
+          color: Color(0xFF2F9D70),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              SizedBox(
+                height: 90,
               ),
-              child: Text(
-                'Menú',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              _buildMenuItem(
+                icon: Icons.home,
+                title: 'Inicio',
+                onTap: () {},
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home, color: Colors.blue.shade600),
-              title: Text('Inicio'),
-              onTap: () {
-                // Acción al tocar "Inicio"
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.map, color: Colors.blue.shade600),
-              title: Text('Mapas'),
-              onTap: () {
-                // Acción al tocar "Mapas"
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.language, color: Colors.blue.shade600),
-              title: Text('Idiomas'),
-              onTap: () {
-                // Acción al tocar "Idiomas"
-              },
-            ),
-          ],
+              _buildMenuItem(
+                icon: Icons.location_on,
+                title: 'Ubicación',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.map,
+                title: 'Guía',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.qr_code_scanner,
+                title: 'Escáner',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.book,
+                title: 'Datos y Curiosidades',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.history,
+                title: 'Historial y Evolución',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.calendar_today,
+                title: 'Planificar visita',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.call,
+                title: 'Seguridad y Emergencia',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.language,
+                title: 'Idiomas',
+                onTap: () {},
+              ),
+              _buildMenuItem(
+                icon: Icons.exit_to_app,
+                title: 'Salir',
+                onTap: () {},
+              ),
+            ],
+          ),
         ),
       ),
       body: Column(
@@ -132,6 +151,22 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildMenuItem(
+      {required IconData icon,
+      required String title,
+      required VoidCallback onTap}) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(icon, color: Colors.white),
+          title: Text(title, style: TextStyle(color: Colors.white)),
+          onTap: onTap,
+        ),
+        Divider(color: Colors.white, thickness: 0.5, indent: 16, endIndent: 16),
+      ],
     );
   }
 }
