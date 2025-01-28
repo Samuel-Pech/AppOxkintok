@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app_oxkintok/generated/l10n.dart';
 
 class LanguageScreen extends StatefulWidget {
+  final Function(String) onLanguageChange;
+
+  const LanguageScreen({required this.onLanguageChange, super.key});
+
   @override
   _LanguageScreenState createState() => _LanguageScreenState();
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
   String _selectedLanguage = 'es';
+  bool _isLoading = true;
 
   final List<Map<String, String>> _languages = [
     {'name': 'Español', 'code': 'es'},
     {'name': 'English', 'code': 'en'},
-    {'name': 'Maya', 'code': 'maya'},
-    {'name': 'Français', 'code': 'fr'},
-    {'name': 'Deutsch', 'code': 'de'},
-    {'name': 'Italiano', 'code': 'it'},
-    {'name': 'Português', 'code': 'pt'},
-    {'name': 'Nederlands', 'code': 'nl'},
-    {'name': 'Русский', 'code': 'ru'},
-    {'name': '中文', 'code': 'zh'},
-    {'name': '日本語', 'code': 'ja'},
-    {'name': '한국어', 'code': 'ko'},
-    {'name': 'العربية', 'code': 'ar'},
-    {'name': 'हिन्दी', 'code': 'hi'},
-    {'name': 'বাংলা', 'code': 'bn'},
-    {'name': 'Türkçe', 'code': 'tr'},
-    {'name': 'Tiếng Việt', 'code': 'vi'},
-    {'name': 'Polski', 'code': 'pl'},
-    {'name': 'ไทย', 'code': 'th'},
-    {'name': 'Magyar', 'code': 'hu'},
   ];
 
   @override
@@ -42,6 +30,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _selectedLanguage = prefs.getString('language') ?? 'es';
+      _isLoading = false; // Change loading state after the preference is loaded
     });
   }
 
@@ -51,18 +40,21 @@ class _LanguageScreenState extends State<LanguageScreen> {
   }
 
   void _updateLanguage(String language) {
+    final languageName =
+        _languages.firstWhere((lang) => lang['code'] == language)['name'];
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirmar Cambio de Idioma'),
-          content: Text('¿Estás seguro de cambiar el idioma a $language?'),
+          title: Text(S.of(context)!.confirmLanguageChange),
+          content: Text(
+              '${S.of(context)!.confirmLanguageChangeMessage} $languageName?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar'),
+              child: Text(S.of(context)!.cancel),
             ),
             TextButton(
               onPressed: () {
@@ -71,8 +63,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   _selectedLanguage = language;
                 });
                 _saveLanguagePreference(language);
+                widget.onLanguageChange(language);
               },
-              child: Text('Aceptar'),
+              child: Text(S.of(context)!.accept),
             ),
           ],
         );
@@ -84,38 +77,53 @@ class _LanguageScreenState extends State<LanguageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configuración de Idioma'),
+        title: Text(S.of(context)!.languageSettings),
         backgroundColor: Color(0xFF2F9D70),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Selecciona el idioma:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      S.of(context)!.selectLanguage,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    ..._languages.map((language) =>
+                        _buildRadioTile(language['name']!, language['code']!)),
+                  ],
+                ),
               ),
-              SizedBox(height: 16),
-              ..._languages.map((language) =>
-                  _buildRadioTile(language['name']!, language['code']!)),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
   Widget _buildRadioTile(String title, String value) {
     return Card(
-      elevation: 4,
-      margin: EdgeInsets.only(bottom: 8),
+      elevation: 6,
+      margin: EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: RadioListTile<String>(
-        title: Text(title),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color:
+                _selectedLanguage == value ? Color(0xFF2F9D70) : Colors.black,
+          ),
+        ),
         value: value,
         groupValue: _selectedLanguage,
         onChanged: (value) {
@@ -123,70 +131,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
             _updateLanguage(value);
           }
         },
+        activeColor: Color(0xFF2F9D70),
       ),
-    );
-  }
-}
-
-class LanguageManager {
-  static final LanguageManager _instance = LanguageManager._internal();
-
-  factory LanguageManager() {
-    return _instance;
-  }
-
-  LanguageManager._internal();
-
-  String _currentLanguage = 'es';
-
-  String get currentLanguage => _currentLanguage;
-
-  Future<void> loadLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _currentLanguage = prefs.getString('language') ?? 'es';
-  }
-
-  void setLanguage(String language) {
-    _currentLanguage = language;
-  }
-}
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await LanguageManager().loadLanguage();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Oxkintok',
-      locale: Locale(LanguageManager().currentLanguage),
-      supportedLocales: [
-        Locale('en', ''),
-        Locale('es', ''),
-        Locale('maya', ''),
-        Locale('fr', ''),
-        Locale('de', ''),
-        Locale('it', ''),
-        Locale('pt', ''),
-        Locale('nl', ''),
-        Locale('ru', ''),
-        Locale('zh', ''),
-        Locale('ja', ''),
-        Locale('ko', ''),
-        Locale('ar', ''),
-        Locale('hi', ''),
-        Locale('bn', ''),
-        Locale('tr', ''),
-        Locale('vi', ''),
-        Locale('pl', ''),
-        Locale('th', ''),
-        Locale('hu', ''),
-      ],
-      localizationsDelegates: [],
-      home: LanguageScreen(),
     );
   }
 }

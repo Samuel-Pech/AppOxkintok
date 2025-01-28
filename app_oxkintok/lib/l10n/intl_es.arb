@@ -1,0 +1,22 @@
+{
+  "languageSettings": "Configuración de Idioma",
+  "appTitle": "Oxkintok",
+  
+  "welcomeMessage": "Bienvenido",
+  "home": "Inicio",
+  "guide": "Guía",
+  "map": "Mapa",
+  "scanner": "Escáner",
+  "dataAndCuriosities": "Datos y Curiosidades",
+  "historyAndEvolution": "Historial y Evolución",
+  "planVisit": "Planificar visita",
+  "securityAndEmergency": "Seguridad y Emergencia",
+  "languages": "Idiomas",
+  "exit": "Salir",
+
+  "selectLanguage": "Selecciona el idioma:",
+  "confirmLanguageChange": "Confirmar cambio de idioma",
+  "confirmLanguageChangeMessage": "¿Estás seguro de cambiar el idioma a",
+  "cancel": "Cancelar",
+  "accept": "Aceptar"
+}

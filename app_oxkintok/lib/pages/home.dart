@@ -9,8 +9,12 @@ import 'package:app_oxkintok/pages/timeline.dart';
 import 'package:app_oxkintok/pages/tourism_guide.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:app_oxkintok/generated/l10n.dart';
 
 class HomeScreen extends StatelessWidget {
+  final Function(String) onLanguageChange;
+
+  const HomeScreen({required this.onLanguageChange, super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,87 +37,107 @@ class HomeScreen extends StatelessWidget {
               ),
               _buildMenuItem(
                 icon: Icons.home,
-                title: 'Inicio',
+                title: S.of(context)!.home,
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                        onLanguageChange: (String) {},
+                      ),
+                    ),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.location_on,
-                title: 'Guia',
+                title: S.of(context)!.guide,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TourismGuidePage()));
+                    context,
+                    MaterialPageRoute(builder: (context) => TourismGuidePage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.map,
-                title: 'Mapa',
+                title: S.of(context)!.map,
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MapPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapPage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.qr_code_scanner,
-                title: 'Escáner',
+                title: S.of(context)!.scanner,
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ScannerPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ScannerPage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.book,
-                title: 'Datos y Curiosidades',
+                title: S.of(context)!.dataAndCuriosities,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DataCuriositiesPage()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DataCuriositiesPage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.history,
-                title: 'Historial y Evolución',
+                title: S.of(context)!.historyAndEvolution,
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TimelinePage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TimelinePage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.calendar_today,
-                title: 'Planificar visita',
+                title: S.of(context)!.planVisit,
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PlanVisitPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlanVisitPage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.call,
-                title: 'Seguridad y Emergencia',
+                title: S.of(context)!.securityAndEmergency,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SecurityEmergencyPage()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SecurityEmergencyPage()),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.language,
-                title: 'Idiomas',
+                title: S.of(context)!.languages,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LanguageScreen()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LanguageScreen(
+                        onLanguageChange: onLanguageChange,
+                      ),
+                    ),
+                  );
                 },
               ),
               _buildMenuItem(
                 icon: Icons.exit_to_app,
-                title: 'Salir',
+                title: S.of(context)!.exit,
                 onTap: () {
                   _showExitConfirmation(context);
                 },
@@ -232,7 +256,7 @@ class HomeScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                exit(0); // Cerrar la app
+                exit(0);
               },
               child: Text('Salir'),
             ),
