@@ -45,19 +45,18 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Oxkintok',
-      locale: Locale(_languageCode), // Actualiza el idioma de la app
+      locale: Locale(_languageCode),
       supportedLocales: [
         Locale('en', ''),
         Locale('es', ''),
       ],
       localizationsDelegates: [
-        S.delegate, // Delegado de traducciones generadas
+        S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-
       home: HomeScreen(onLanguageChange: changeLanguage),
     );
   }

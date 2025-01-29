@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:app_oxkintok/pages/data_curiosities.dart';
 import 'package:app_oxkintok/pages/languages.dart';
 import 'package:app_oxkintok/pages/map.dart';
-import 'package:app_oxkintok/pages/plan_visit.dart';
+import 'package:app_oxkintok/pages/Recommendations.dart';
 import 'package:app_oxkintok/pages/scanner.dart';
 import 'package:app_oxkintok/pages/security_emergency.dart';
 import 'package:app_oxkintok/pages/timeline.dart';
@@ -102,11 +102,12 @@ class HomeScreen extends StatelessWidget {
               ),
               _buildMenuItem(
                 icon: Icons.calendar_today,
-                title: S.of(context)!.planVisit,
+                title: S.of(context)!.Recommendations,
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PlanVisitPage()),
+                    MaterialPageRoute(
+                        builder: (context) => RecommendationsPage()),
                   );
                 },
               ),

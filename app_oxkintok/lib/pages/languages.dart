@@ -30,7 +30,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _selectedLanguage = prefs.getString('language') ?? 'es';
-      _isLoading = false; // Change loading state after the preference is loaded
+      _isLoading = false;
     });
   }
 
