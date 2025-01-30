@@ -39,7 +39,7 @@ class SecurityEmergencyPage extends StatelessWidget {
         child: ListView(
           children: [
             const Text(
-              'Contactos de Emergencia:',
+              'Contactos de Emergencias:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
