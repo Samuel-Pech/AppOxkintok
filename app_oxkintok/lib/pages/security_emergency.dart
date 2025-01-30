@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SecurityEmergencyPage extends StatelessWidget {
+  // Función para realizar llamadas
+  void _makeCall(String phoneNumber) async {
+    final Uri callUri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(callUri)) {
+      await launchUrl(callUri);
+    } else {
+      throw 'No se pudo iniciar la llamada a $phoneNumber';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seguridad y Emergencia'),
-        backgroundColor: Color(0xFF2F9D70),
+        title: const Row(
+          children: [
+            Icon(Icons.call, color: Colors.white),
+            SizedBox(width: 10),
+            Text(
+              'Seguridad y Emergencia',
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+        backgroundColor: const Color(0xFF2F9D70),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -16,60 +36,96 @@ class SecurityEmergencyPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
-            Text(
-              'Información de Seguridad y Emergencia',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'En caso de emergencia, por favor sigue los siguientes pasos:',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '1. Llama al número de emergencia local.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '2. Proporciona tu ubicación y la descripción de la emergencia.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '3. Mantén la calma y sigue las instrucciones del operador.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '4. Si es posible, ayuda a otras personas que puedan necesitar asistencia.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 20),
-            Text(
+            const Text(
               'Contactos de Emergencia:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
-            Text(
-              'Policía: 123-456-7890',
-              style: TextStyle(fontSize: 16),
+            const SizedBox(height: 10),
+            _buildEmergencyContact(
+              icon: Icons.local_fire_department,
+              label: 'Bomberos',
+              phoneNumber: '911',
             ),
-            SizedBox(height: 10),
-            Text(
-              'Bomberos: 098-765-4321',
-              style: TextStyle(fontSize: 16),
+            _buildEmergencyContact(
+              icon: Icons.local_police,
+              label: 'Policía',
+              phoneNumber: '911',
             ),
-            SizedBox(height: 10),
-            Text(
-              'Servicios Médicos: 112-233-4455',
-              style: TextStyle(fontSize: 16),
+            _buildEmergencyContact(
+              icon: Icons.local_hospital,
+              label: 'Servicios Médicos',
+              phoneNumber: '911',
             ),
+            const SizedBox(height: 20),
+            const Text(
+              'Protocolos de Seguridad:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            _buildProtocolItem('En caso de incendio, siga las rutas de evacuación.'),
+            _buildProtocolItem('Diríjase a las áreas seguras marcadas en el mapa.'),
+            _buildProtocolItem('Reporte cualquier emergencia al personal.'),
+            const SizedBox(height: 20),
+            const Text(
+              'Áreas Seguras y Primeros Auxilios:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Container(
+              height: 200,
+              color: Colors.grey[300],
+              child: const Center(child: Text('Mapa interactivo aquí')),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Consejos Prácticos:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            _buildTip('Mantente hidratado, lleva una botella de agua.'),
+            _buildTip('Usa protector solar para evitar quemaduras.'),
+            _buildTip('Camina con precaución por terrenos irregulares.'),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildEmergencyContact({required IconData icon, required String label, required String phoneNumber}) {
+    return ListTile(
+      leading: Icon(icon, color: const Color(0xFF2F9D70)),
+      title: Text(label),
+      trailing: IconButton(
+        icon: const Icon(Icons.phone, color: Colors.blue),
+        onPressed: () => _makeCall(phoneNumber),
+      ),
+    );
+  }
+
+  Widget _buildProtocolItem(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.check_circle, color: Colors.green, size: 20),
+          const SizedBox(width: 10),
+          Expanded(child: Text(text)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTip(String tip) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        children: [
+          const Icon(Icons.lightbulb, color: Colors.orange),
+          const SizedBox(width: 10),
+          Expanded(child: Text(tip)),
+        ],
       ),
     );
   }
