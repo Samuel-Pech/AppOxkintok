@@ -36,9 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.0.0
   shared_preferences: ^2.4.0
+  google_fonts: ^6.2.1
+  url_launcher: ^6.3.1
+  geolocator: ^13.0.2
+
   intl:  ^0.19.0
   flutter_localizations:
     sdk: flutter
+  font_awesome_flutter: ^10.8.0
 
 
 dev_dependencies:
@@ -60,6 +65,7 @@ flutter:
   generate: true
   assets:
     - lib/l10n/
+    - assets/imagenes/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -13,6 +13,12 @@
   "securityAndEmergency": "Seguridad y Emergencia",
   "languages": "Idiomas",
   "exit": "Salir",
+  "confirmExit": "¿Estás seguro de que deseas salir?",
+  "confirmExitDescription": "Mensaje de confirmación para salir de la aplicación.",
+   "moreInfo": "Más Información",
+
+  "animatedText1": "Descubre las maravillas de Oxkintok, un sitio arqueológico lleno de historia y cultura.",
+  "animatedText2": "Oxkintok es considerado uno de los asentamientos más importantes del norte de Yucatán y, quizás, la ciudad más antigua de la región Puuc central. Su posición le permitió controlar el flujo de bienes comerciales procedentes del sur de la península y conectarse con otras culturas contemporáneas. Su cronología principal es Preclásico Superior y se extiende hasta el Posclásico Temprano, del 300 a. C., a aproximadamente 1200 d. C.",
 
   "selectLanguage": "Selecciona el idioma:",
   "confirmLanguageChange": "Confirmar cambio de idioma",
@@ -51,5 +57,35 @@
   "recommendation20": "No olvides llevar una botella de agua reutilizable para mantenerte hidratado.",
   "recommendation21": "En Maxcanú también encontrarás tiendas donde podrás adquirir algunos productos básicos antes de llegar a Oxkintok.",
   "recommendation22": "Oxkintok es un sitio arqueológico de gran valor histórico. Respeta las indicaciones, no subas a las estructuras no permitidas y no dejes basura.",
-  "recommendation23": "Recuerda que el respeto al patrimonio cultural ayuda a preservar estos lugares para futuras generaciones."
+  "recommendation23": "Recuerda que el respeto al patrimonio cultural ayuda a preservar estos lugares para futuras generaciones.",
+
+  
+    "information": "Información",
+    "location": "UBICACIÓN",
+    "locationDescription": "Se localiza al sur de Yucatán en el municipio de Maxcanú, a 74 km de la ciudad de Mérida. Puedes ir al menú en el módulo de ubicación, donde encontrarás un mapa con indicaciones para llegar.",
+    "access": "ACCESO",
+    "accessDescription": "Por la carretera federal número 180, que conduce a la ciudad de Campeche, o por Villa de Maxcanú a la población de Calcehtok.",
+    "hours": "HORARIO",
+    "hoursDescription": "Lunes a domingo de 08:00 a 17:00 hrs. Último acceso 16:00 hrs.",
+    "entrance": "ENTRADA",
+    "entranceFee": "$75.00 pesos",
+    "restrictions": "RESTRICCIONES",
+    "restrictionsDescription": "- Prohibido fumar\n- Prohibido ingresar alimentos\n- Prohibido mascotas",
+
+  "securityAndEmergencypage": "Seguridad y Emergencia",
+  "emergencyContacts": "Contactos de Emergencias:",
+  "firefighters": "Bomberos",
+  "police": "Policía",
+  "medicalServices": "Servicios Médicos",
+  "emergencyContactNumber": "911",
+  "securityProtocols": "Protocolos de Seguridad:",
+  "fireProtocol": "En caso de incendio, siga las rutas de evacuación.",
+  "safeAreasProtocol": "Diríjase a las áreas seguras marcadas en el mapa.",
+  "reportEmergency": "Reporte cualquier emergencia al personal.",
+  "safeAreasAndFirstAid": "Áreas Seguras y Primeros Auxilios:",
+  "interactiveMap": "Mapa interactivo aquí",
+  "practicalTips": "Consejos Prácticos:",
+  "stayHydrated": "Mantente hidratado, lleva una botella de agua.",
+  "useSunscreen": "Usa protector solar para evitar quemaduras.",
+  "walkCarefully": "Camina con precaución por terrenos irregulares."
 }

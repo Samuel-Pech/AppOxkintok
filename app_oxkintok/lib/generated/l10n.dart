@@ -10,89 +10,79 @@ import 'intl/messages_all.dart';
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
-// ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
 class S {
   S();
-  
-  static S? current;
-  
-  static const AppLocalizationDelegate delegate =
-    AppLocalizationDelegate();
+
+  static S? _current;
+
+  static S get current {
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
+    return _current!;
+  }
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      S.current = S();
-      
-      return S.current!;
-    });
-  } 
+      final instance = S();
+      S._current = instance;
 
-  static S? of(BuildContext context) {
+      return instance;
+    });
+  }
+
+  static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
+    return instance!;
+  }
+
+  static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
 
   /// `Oxkintok`
   String get appTitle {
-    return Intl.message(
-      'Oxkintok',
-      name: 'appTitle',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Oxkintok', name: 'appTitle', desc: '', args: []);
   }
 
   /// `Welcome`
   String get welcomeMessage {
-    return Intl.message(
-      'Welcome',
-      name: 'welcomeMessage',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Welcome', name: 'welcomeMessage', desc: '', args: []);
   }
 
   /// `Home`
   String get home {
-    return Intl.message(
-      'Home',
-      name: 'home',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Home', name: 'home', desc: '', args: []);
   }
 
   /// `Guide`
   String get guide {
-    return Intl.message(
-      'Guide',
-      name: 'guide',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Guide', name: 'guide', desc: '', args: []);
   }
 
   /// `Map`
   String get map {
-    return Intl.message(
-      'Map',
-      name: 'map',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Map', name: 'map', desc: '', args: []);
   }
 
   /// `Scanner`
   String get scanner {
-    return Intl.message(
-      'Scanner',
-      name: 'scanner',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Scanner', name: 'scanner', desc: '', args: []);
   }
 
   /// `Data and Curiosities`
@@ -137,19 +127,59 @@ class S {
 
   /// `Languages`
   String get languages {
+    return Intl.message('Languages', name: 'languages', desc: '', args: []);
+  }
+
+  /// `Exit`
+  String get exit {
+    return Intl.message('Exit', name: 'exit', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to exit?`
+  String get confirmExit {
     return Intl.message(
-      'Languages',
-      name: 'languages',
+      'Are you sure you want to exit?',
+      name: 'confirmExit',
       desc: '',
       args: [],
     );
   }
 
-  /// `Exit`
-  String get exit {
+  /// `Confirmation message for exiting the app.`
+  String get confirmExitDescription {
     return Intl.message(
-      'Exit',
-      name: 'exit',
+      'Confirmation message for exiting the app.',
+      name: 'confirmExitDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More Information`
+  String get moreInfo {
+    return Intl.message(
+      'More Information',
+      name: 'moreInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discover the wonders of Oxkintok, an archaeological site full of history and culture.`
+  String get animatedText1 {
+    return Intl.message(
+      'Discover the wonders of Oxkintok, an archaeological site full of history and culture.',
+      name: 'animatedText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oxkintok is considered one of the most important settlements in northern Yucatán and perhaps the oldest city in the central Puuc region. Its position allowed it to control the flow of trade goods from the south of the peninsula and connect with other contemporary cultures. Its main chronology is Late Preclassic and extends to the Early Postclassic, from 300 B.C. to approximately 1200 A.D.`
+  String get animatedText2 {
+    return Intl.message(
+      'Oxkintok is considered one of the most important settlements in northern Yucatán and perhaps the oldest city in the central Puuc region. Its position allowed it to control the flow of trade goods from the south of the peninsula and connect with other contemporary cultures. Its main chronology is Late Preclassic and extends to the Early Postclassic, from 300 B.C. to approximately 1200 A.D.',
+      name: 'animatedText2',
       desc: '',
       args: [],
     );
@@ -197,22 +227,12 @@ class S {
 
   /// `Cancel`
   String get cancel {
-    return Intl.message(
-      'Cancel',
-      name: 'cancel',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
   /// `Accept`
   String get accept {
-    return Intl.message(
-      'Accept',
-      name: 'accept',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Accept', name: 'accept', desc: '', args: []);
   }
 
   /// `Oxkintok Visit Plan`
@@ -247,22 +267,12 @@ class S {
 
   /// `Transport`
   String get transport {
-    return Intl.message(
-      'Transport',
-      name: 'transport',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Transport', name: 'transport', desc: '', args: []);
   }
 
   /// `Weather`
   String get weather {
-    return Intl.message(
-      'Weather',
-      name: 'weather',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Weather', name: 'weather', desc: '', args: []);
   }
 
   /// `Local Guides`
@@ -287,12 +297,7 @@ class S {
 
   /// `Services`
   String get services {
-    return Intl.message(
-      'Services',
-      name: 'services',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Services', name: 'services', desc: '', args: []);
   }
 
   /// `Respect the Site`
@@ -530,6 +535,246 @@ class S {
     return Intl.message(
       'Remember that respecting cultural heritage helps preserve these places for future generations.',
       name: 'recommendation23',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information`
+  String get information {
+    return Intl.message('Information', name: 'information', desc: '', args: []);
+  }
+
+  /// `LOCATION`
+  String get location {
+    return Intl.message('LOCATION', name: 'location', desc: '', args: []);
+  }
+
+  /// `It is located to the south of Yucatán in the municipality of Maxcanú, 74 km from the city of Mérida. You can go to the menu in the location module where you'll find a map with directions to get there.`
+  String get locationDescription {
+    return Intl.message(
+      'It is located to the south of Yucatán in the municipality of Maxcanú, 74 km from the city of Mérida. You can go to the menu in the location module where you\'ll find a map with directions to get there.',
+      name: 'locationDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACCESS`
+  String get access {
+    return Intl.message('ACCESS', name: 'access', desc: '', args: []);
+  }
+
+  /// `By federal highway number 180, which leads to the city of Campeche, or by Villa de Maxcanú to the town of Calcehtok.`
+  String get accessDescription {
+    return Intl.message(
+      'By federal highway number 180, which leads to the city of Campeche, or by Villa de Maxcanú to the town of Calcehtok.',
+      name: 'accessDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HOURS`
+  String get hours {
+    return Intl.message('HOURS', name: 'hours', desc: '', args: []);
+  }
+
+  /// `Monday to Sunday from 08:00 to 17:00 hrs. Last entry at 16:00 hrs.`
+  String get hoursDescription {
+    return Intl.message(
+      'Monday to Sunday from 08:00 to 17:00 hrs. Last entry at 16:00 hrs.',
+      name: 'hoursDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ENTRANCE`
+  String get entrance {
+    return Intl.message('ENTRANCE', name: 'entrance', desc: '', args: []);
+  }
+
+  /// `$75.00 pesos`
+  String get entranceFee {
+    return Intl.message(
+      '\$75.00 pesos',
+      name: 'entranceFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RESTRICTIONS`
+  String get restrictions {
+    return Intl.message(
+      'RESTRICTIONS',
+      name: 'restrictions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `- Smoking is prohibited\n- Food is not allowed\n- Pets are not allowed`
+  String get restrictionsDescription {
+    return Intl.message(
+      '- Smoking is prohibited\n- Food is not allowed\n- Pets are not allowed',
+      name: 'restrictionsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Security and Emergency`
+  String get securityAndEmergencypage {
+    return Intl.message(
+      'Security and Emergency',
+      name: 'securityAndEmergencypage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency Contacts:`
+  String get emergencyContacts {
+    return Intl.message(
+      'Emergency Contacts:',
+      name: 'emergencyContacts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Firefighters`
+  String get firefighters {
+    return Intl.message(
+      'Firefighters',
+      name: 'firefighters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Police`
+  String get police {
+    return Intl.message('Police', name: 'police', desc: '', args: []);
+  }
+
+  /// `Medical Services`
+  String get medicalServices {
+    return Intl.message(
+      'Medical Services',
+      name: 'medicalServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `911`
+  String get emergencyContactNumber {
+    return Intl.message(
+      '911',
+      name: 'emergencyContactNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Security Protocols:`
+  String get securityProtocols {
+    return Intl.message(
+      'Security Protocols:',
+      name: 'securityProtocols',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In case of fire, follow the evacuation routes.`
+  String get fireProtocol {
+    return Intl.message(
+      'In case of fire, follow the evacuation routes.',
+      name: 'fireProtocol',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Head to the safe areas marked on the map.`
+  String get safeAreasProtocol {
+    return Intl.message(
+      'Head to the safe areas marked on the map.',
+      name: 'safeAreasProtocol',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report any emergency to the staff.`
+  String get reportEmergency {
+    return Intl.message(
+      'Report any emergency to the staff.',
+      name: 'reportEmergency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Safe Areas and First Aid:`
+  String get safeAreasAndFirstAid {
+    return Intl.message(
+      'Safe Areas and First Aid:',
+      name: 'safeAreasAndFirstAid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interactive map here`
+  String get interactiveMap {
+    return Intl.message(
+      'Interactive map here',
+      name: 'interactiveMap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Practical Tips:`
+  String get practicalTips {
+    return Intl.message(
+      'Practical Tips:',
+      name: 'practicalTips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay hydrated, carry a water bottle.`
+  String get stayHydrated {
+    return Intl.message(
+      'Stay hydrated, carry a water bottle.',
+      name: 'stayHydrated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use sunscreen to avoid sunburn.`
+  String get useSunscreen {
+    return Intl.message(
+      'Use sunscreen to avoid sunburn.',
+      name: 'useSunscreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Walk carefully on uneven terrain.`
+  String get walkCarefully {
+    return Intl.message(
+      'Walk carefully on uneven terrain.',
+      name: 'walkCarefully',
       desc: '',
       args: [],
     );
