@@ -35,7 +35,7 @@ class _TimelinePageState extends State<TimelinePage> {
             Icon(Icons.history, color: Colors.white),
             SizedBox(width: 8),
             Text(
-              'Línea de Tiempo de Monumentos',
+              'Historia y Evolucion',
               style: TextStyle(color: Colors.white, fontFamily: 'NotoSans'),
             ),
           ],
@@ -53,7 +53,7 @@ class _TimelinePageState extends State<TimelinePage> {
         child: ListView(
           children: [
             Text(
-              'Línea de Tiempo de Monumentos Importantes',
+              'Conoce Nuestra Linea Del Tiempo',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
